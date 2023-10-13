@@ -1,1 +1,41 @@
-hello
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Image Upload and Save</title>
+</head>
+<body>
+    <h1>Image Upload and Save</h1>
+    <input type="file" id="imageInput" accept="image/*">
+    <button id="saveButton">Save Image to Local Storage</button>
+    
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const saveButton = document.getElementById('saveButton');
+        
+        // Event listener for the file input
+        imageInput.addEventListener('change', function () {
+            // Handle the file selection or display the image here if needed
+        });
+
+        // Event listener for the save button
+        saveButton.addEventListener('click', function () {
+            // Retrieve the uploaded image from the input field
+            const file = imageInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const imageData = event.target.result;
+
+                    // Save the image to local storage
+                    localStorage.setItem('uploadedImage', imageData);
+                    alert('Image saved to local storage!');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please select an image to save.');
+            }
+        });
+    </script>
+</body>
+</html>
