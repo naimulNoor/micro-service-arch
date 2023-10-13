@@ -9,6 +9,8 @@ aws_region = 'us-east-1'  # Specify your AWS region
 # Initialize a Boto3 Polly client with credentials and region
 client = boto3.client('polly', region_name=aws_region, aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
 
+
+
 # Text to be converted to speech
 text = "Hello, this is a test of Amazon Polly text-to-speech service."
 
