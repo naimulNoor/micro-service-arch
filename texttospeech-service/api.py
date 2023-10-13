@@ -1,13 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse
-from keras import models
 import uvicorn
-import time
-import numpy
-from PIL import Image
-import os
 import boto3
-from io import BytesIO
 import random
 from fastapi.middleware.cors import CORSMiddleware
 
