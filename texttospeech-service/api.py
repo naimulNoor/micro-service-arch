@@ -18,7 +18,12 @@ app.add_middleware(
 )
 
 # Set your AWS credentials and region
-
+# AKIAX3X6M7S6KYAJOOG5
+# A7sQMPwZj/jnW9dhzflL26RbYh4XUG8TDQ+c75gd
+# us-east-1
+aws_region="us-east-1"
+aws_access_key_id="AKIAX3X6M7S6KYAJOOG5"
+aws_secret_access_key="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"
 
 def readAudio(fileName):
     return FileResponse(fileName, media_type="audio/mpeg")

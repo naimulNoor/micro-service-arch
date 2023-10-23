@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: digitreader-deployment
+spec:
+  replicas: 1  
+  selector:
+    matchLabels:
+      app:  multiarch-app
+  template:
+    metadata:
+      labels:
+        app: multiarch-app
+    spec:
+      containers:
+        - name: digitreader
+          image: digit-reader:0.0.1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8081

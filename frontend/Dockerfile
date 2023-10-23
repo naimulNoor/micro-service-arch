@@ -1,12 +1,14 @@
-FROM python:3.10.12-slim
+# Use the official Nginx image as the base image
+FROM nginx:latest
 
-WORKDIR /app
+# Remove the default Nginx welcome page
+RUN rm /usr/share/nginx/html/index.html
 
-COPY api/api.py .
-COPY api/handwriting.keras .
-COPY index.html .
+# Copy your HTML files into the Nginx web root directory
+COPY index.html /usr/share/nginx/html
 
-RUN pip install tensorflow numpy mnist keras fastapi "uvicorn[standard]" Pillow
+# Expose port 80, which is the default port for HTTP
+EXPOSE 80
 
-EXPOSE 8081
-CMD [ "python3","api.py"]
+# Start Nginx when the container starts
+CMD ["nginx", "-g", "daemon off;"]

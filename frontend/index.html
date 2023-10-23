@@ -9,8 +9,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-    <div class="container">
+  <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <!-- Content within the centered container -->
@@ -21,15 +20,28 @@
                     <img src="#" height="200" width="200" alt="Image Preview" class="img-fluid">
                 </div>
             </br>
-                
-                    <div class="mb-3">
+                <div class="mb-3">
                         <label for="image" class="form-label">Choose an image:</label>
                         <input type="file" class="form-control" name="image" id="image" accept="image/*" onchange="previewImage(this)">
                     </div>
                 </br>
+                <div class="dropdown">
+                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Translate Language
+                 <span class="caret"></span></button>
+                    <ul id="itemList" class="dropdown-menu"  >
+                        <li onclick="displayLanguage('Bangla')">Bangla</li>
+                        <li onclick="displayLanguage('Finnish')">Finnish</li>
+                        <li onclick="displayLanguage('Spanish')">Spanish</li>
+                    </ul>
+                </div>
+                </br>
+                <div id="displayArea"></div>
+                <h2>output:</h2>
+                <div id="language"></div>
+                </br>
                    <div class="row">
                     <button type="submit" onclick="doUpload()" class="btn btn-primary">Upload Image</button>
-                    <button type="submit" onclick="doTranslator()" class="btn btn-primary">Translate Text to Bangla</button>
+                    <button type="submit" onclick="doTranslator()" class="btn btn-primary">Translate</button>
                     <button type="submit"  id="playButton" class="btn btn-primary">Text To Speech</button>
                    </div>
                 </br>
@@ -42,13 +54,11 @@
                     
             
             </div>
-            
-            </div>
         </div>
-    </div>
+  </div>
+  </div>
 
-
-    <script>
+<script>
         // JavaScript for image preview
         function previewImage(input) {
             var preview = document.getElementById('image-preview');
@@ -79,7 +89,7 @@
                 alert(xhr.status+': '+ localStorage.getItem('predict-data'))
                
             }
-            xhr.open('POST','/read-image')
+            xhr.open('POST','http://digitreader-service/read-image')
             xhr.send(files[0])
         }
         function doTextToSpeech(){
@@ -104,15 +114,59 @@
                 if (xhr.readyState!==4){
                     return
                 }
-                alert(xhr.status+': '+xhr.responseText)
+                var displayLan = document.getElementById("language");
+                displayLan.innerHTML = xhr.responseText;
+                console.log(xhr.responseText)
+                //alert(xhr.status+': '+xhr.responseText)
             }
-            xhr.open('POST','http://localhost:8080/text-to-speech')
-            console.log(localStorage.getItem('predict-data'))
-            xhr.send(localStorage.getItem('predict-data'))
+            xhr.open('POST','http://localhost:8082/translate-text')
+            console.log(localStorage.getItem('selectedLanguageCode'))
+            var jsonData={"data": localStorage.getItem('predict-data'),"lang":localStorage.getItem('selectedLanguageCode')}
+            const finalData = JSON.stringify(jsonData);
+            //console.log(jsonData)
+            xhr.send(finalData)
         }
- 
-        //play sound
 
+        
+ 
+        function displayLanguage(value){
+            // Get the select element
+            var select = document.getElementById("itemList");
+            
+            // Get the selected option's value
+            var selectedValue = select.value;
+
+            // Get the display area div
+            var displayDiv = document.getElementById("displayArea");
+
+            var languageCode
+            
+            switch (value) {
+                case "Bangla":
+                    // Code to execute when expression matches value1
+                    languageCode="bn"
+                    break;
+                case "Finnish":
+                    // Code to execute when expression matches value2
+                    languageCode="fi"
+                    break;
+                case "Spanish":
+                    // Code to execute when expression matches value2
+                    languageCode="es"
+                    break;
+            
+            }
+
+            localStorage.setItem("selectedLanguageCode",languageCode)
+
+            
+
+            // Display the selected item
+            displayDiv.innerHTML = "You selected: " + value;
+        }
+        
+        
+        //play sound
         const audioPlayer = document.getElementById('audioPlayer');
         const playButton = document.getElementById('playButton');
     
