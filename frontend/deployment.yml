@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: frontend:0.0.1
+          image: mk-frontend:1.0.1
           imagePullPolicy: Never
           ports:
             - containerPort: 80

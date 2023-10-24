@@ -89,7 +89,7 @@
                 alert(xhr.status+': '+ localStorage.getItem('predict-data'))
                
             }
-            xhr.open('POST','http://digitreader-service/read-image')
+            xhr.open('POST','http://digitreader-service:8081/read-image')
             xhr.send(files[0])
         }
         function doTextToSpeech(){
@@ -119,7 +119,7 @@
                 console.log(xhr.responseText)
                 //alert(xhr.status+': '+xhr.responseText)
             }
-            xhr.open('POST','http://localhost:8082/translate-text')
+            xhr.open('POST','http://translation-service:8082/translate-text')
             console.log(localStorage.getItem('selectedLanguageCode'))
             var jsonData={"data": localStorage.getItem('predict-data'),"lang":localStorage.getItem('selectedLanguageCode')}
             const finalData = JSON.stringify(jsonData);
