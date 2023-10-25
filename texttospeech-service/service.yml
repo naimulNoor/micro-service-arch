@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: deployment-texttoservice
+  namespace: default
+  labels:
+    app: deployment-texttoservice
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: NodePort
