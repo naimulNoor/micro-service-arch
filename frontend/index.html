@@ -89,7 +89,7 @@
                 alert(xhr.status+': '+ localStorage.getItem('predict-data'))
                
             }
-            xhr.open('POST','http://digitreader-service:8081/read-image')
+            xhr.open('POST','/read-image')
             xhr.send(files[0])
         }
         function doTextToSpeech(){
