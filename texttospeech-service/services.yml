@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: translation-service
+  name: texttospeech-service
 spec:
   selector:
-    app: translation-app
+    app: texttospeech-app
   ports:
   - protocol: TCP
-    port: 8082
-    targetPort: 8082
+    port: 8083
+    targetPort: 8083
   type: NodePort

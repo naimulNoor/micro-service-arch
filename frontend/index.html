@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Micro Service Arch</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -89,7 +89,7 @@
                 alert(xhr.status+': '+ localStorage.getItem('predict-data'))
                
             }
-            xhr.open('POST','http://digitreader-service:8081/read-image')
+            xhr.open('POST','read')
             xhr.send(files[0])
         }
         function doTextToSpeech(){
@@ -111,24 +111,24 @@
         function doTranslator(){
             var xhr=new XMLHttpRequest()
             xhr.onreadystatechange=function(){
+               
                 if (xhr.readyState!==4){
-                    return
+                    return 
                 }
                 var displayLan = document.getElementById("language");
                 displayLan.innerHTML = xhr.responseText;
                 console.log(xhr.responseText)
                 //alert(xhr.status+': '+xhr.responseText)
             }
-            xhr.open('POST','http://translation-service:8082/translate-text')
+            xhr.open('POST','/translate')
             console.log(localStorage.getItem('selectedLanguageCode'))
             var jsonData={"data": localStorage.getItem('predict-data'),"lang":localStorage.getItem('selectedLanguageCode')}
+            //var jsonData={"data": "i am roni","lang":localStorage.getItem('selectedLanguageCode')}
             const finalData = JSON.stringify(jsonData);
-            //console.log(jsonData)
+           
             xhr.send(finalData)
         }
 
-        
- 
         function displayLanguage(value){
             // Get the select element
             var select = document.getElementById("itemList");
@@ -171,8 +171,8 @@
         const playButton = document.getElementById('playButton');
     
         playButton.addEventListener('click', () => {
-        // Replace 'your_api_endpoint_here' with the actual API endpoint
-        fetch('http://localhost:8080/text-to-speech', {
+
+        fetch('/textToSpeech', {
             method: 'POST',
             headers: {
                 'Content-Type': 'audio/mpeg',

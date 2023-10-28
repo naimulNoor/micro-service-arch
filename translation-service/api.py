@@ -23,6 +23,10 @@ app.add_middleware(
 # A7sQMPwZj/jnW9dhzflL26RbYh4XUG8TDQ+c75gd
 # us-east-1
 
+aws_region=""
+aws_access_key_id=""
+aws_secret_access_key=""
+
 
 def transLateTask(data):
     #convert json 

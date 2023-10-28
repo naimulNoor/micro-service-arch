@@ -6,15 +6,15 @@ spec:
   replicas: 1  
   selector:
     matchLabels:
-      app:  multiarch-app
+      app:  digitreader-app
   template:
     metadata:
       labels:
-        app: multiarch-app
+        app: digitreader-app
     spec:
       containers:
         - name: digitreader
-          image: mk-digit-reader:1.0.0
+          image: mk-digit-reader:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8081

@@ -4,9 +4,9 @@ metadata:
   name: digitreader-service
 spec:
   selector:
-    app: multiarch-app
+    app: digitreader-app
   ports:
   - protocol: TCP
     port: 8081
     targetPort: 8081
-  type: LoadBalancer
+  type: NodePort

@@ -1,14 +1,12 @@
-# Use the official Nginx image as the base image
-FROM nginx:latest
+FROM python:3.10.12-slim
 
-# Remove the default Nginx welcome page
-RUN rm /usr/share/nginx/html/index.html
+WORKDIR /app
 
-# Copy your HTML files into the Nginx web root directory
-COPY index.html /usr/share/nginx/html
+COPY api.py .
+COPY index.html .
 
-# Expose port 80, which is the default port for HTTP
-EXPOSE 80
+RUN pip install boto3 fastapi "uvicorn[standard]" Pillow
+RUN pip install requests
 
-# Start Nginx when the container starts
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 7080
+CMD [ "python3","api.py"]

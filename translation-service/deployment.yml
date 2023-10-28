@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: translation
-          image: mk-translation:1.0.0
+          image: mk-translation:1.0.1
           imagePullPolicy: Never
           ports:
             - containerPort: 8082

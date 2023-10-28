@@ -22,9 +22,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get('/')
-async def getHome():
-    return FileResponse('../index.html')
+
 
 def convertImage(dst):
     pic = numpy.asarray(Image.open(dst).convert('L').resize((28, 28)), float)

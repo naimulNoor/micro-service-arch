@@ -21,12 +21,14 @@ app.add_middleware(
 # AKIAX3X6M7S6KYAJOOG5
 # A7sQMPwZj/jnW9dhzflL26RbYh4XUG8TDQ+c75gd
 # us-east-1
-aws_region="us-east-1"
-aws_access_key_id="AKIAX3X6M7S6KYAJOOG5"
-aws_secret_access_key="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"
+aws_region=""
+aws_access_key_id=""
+aws_secret_access_key=""
 
 def readAudio(fileName):
-    return FileResponse(fileName, media_type="audio/mpeg")
+     data= FileResponse(fileName, media_type="audio/mpeg")
+     print(data)
+     return data
 
 def textToSpeechTask(data):
     string_data = data.decode('utf-8')
@@ -62,10 +64,13 @@ def textToSpeechTask(data):
 @app.post('/text-to-speech')
 async def textToSpeech(req: Request):
     # save uploaded file
+    
     content = await req.body()
+    print("get file")
+    print(content)
     return textToSpeechTask(content)
 
    
 
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8080)
+    uvicorn.run(app, host='0.0.0.0', port=8083)
