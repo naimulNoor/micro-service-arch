@@ -1,8 +1,11 @@
-Project Report: Image-to-Text, Text-to-Speech, and Text Translation API Integration
+Project Report: Micro Service Arch
+
+Services :
+Image-to-text, Text-to-Speech, and Text Translation API Integration
 
 Project Overview 
 
-Project Title: Image-to-Text, Text-to-Speech, and Text Translation API Integration
+Project Title: Micro Service Arch
 
 Project Duration: October 14, 2023 to October 25, 2023
 
